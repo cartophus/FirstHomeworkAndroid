@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Homework One</string>
+    <string name="button">button</string>
+    <string name="f2a2">F2A2</string>
+    <string name="f3a2">F3A2</string>
+    <string name="f1a2">R F1A2</string>
+    <string name="die">DIE</string>
+    <string name="insert_user">insert user</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="remove_user">remove user</string>
+    <string name="gf1a2">F1A2</string>
+    <string name="placeholder_text">Placeholder text</string>
+    <string name="current_users">Current users</string>
+</resources>
