@@ -16,6 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -125,12 +133,6 @@ public class F1A1 extends Fragment {
             @Override
             public void actionFailed() {
                 Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                /*
-                mAdapter = new MyAdapter(getContext(), new Vector<String>());
-
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(mAdapter);
-                */
             }
         });
     }
@@ -144,5 +146,31 @@ public class F1A1 extends Fragment {
         }
 
         return -1;
+    }
+
+    public void getToDoItems(){
+        String url = "https://jsonplaceholder.typicode.com/todos?userId=1";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>(){
+
+            @Override
+            public void onResponse(JSONArray response){
+                List<ToDoItem> toDoItemList = new ArrayList<>();
+
+                for(int index = 0; index < response.length(); index++) {
+                    try {
+                        ToDoItem item = new ToDoItem(response.getJSONObject((index)));
+                        toDoItemList.add(item);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(getContext(), "Volley error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
